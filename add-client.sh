@@ -14,8 +14,8 @@ fi
 # Detect default network interface and public IP address
 
 INTERFACE=$(route | grep default | rev | cut -d " " -f 1 | rev)
-IPV4_ADDRESS=$(ip addr list "$INTERFACE" | grep "inet " | xargs | cut -d " " -f 2)
-
+#IPV4_ADDRESS=$(ip addr list "$INTERFACE" | grep "inet " | xargs | cut -d " " -f 2)
+IPV4_ADDRESS=$(dig +short myip.opendns.com @resolver1.opendns.com)
 # Get next available client IP
 
 nextip(){
@@ -69,7 +69,7 @@ DNS = 10.10.0.1
 
 [Peer]
 PublicKey = ${SERVER_PUBKEY}
-AllowedIPs = 0.0.0.0/0, ::/0
+AllowedIPs = 0.0.0.0/0
 Endpoint = ${SERVER_ADDRESS}:${SERVER_PORT}
 "
 
